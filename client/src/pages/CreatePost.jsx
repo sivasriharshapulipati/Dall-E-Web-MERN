@@ -15,16 +15,21 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
+
+  const generateImage =() =>{
+    
+  }
   const handleSubmit=() =>{
     
   }
 
   const handleChange=(e) =>{
-    
+    setForm({...form,[e.target.name]: e.target.value})
   }
 
   const handleSurpriseMe =() =>{
-    
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({...form,prompt:randomPrompt});
   }
   return (
     <section className="mx-auto max-w-7x">
@@ -36,7 +41,7 @@ const CreatePost = () => {
       <form className='max-w-3xl mt-16' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-5'>
           <FormField
-            LabelName = 'Your name'
+            labelName = 'Your name'
             type ='text'
             name = 'name'
             placeholder = 'John Doe'
@@ -44,7 +49,7 @@ const CreatePost = () => {
             handleChange = {handleChange}
           />
           <FormField
-            LabelName = 'Prompt'
+            labelName = 'Prompt'
             type ='text'
             name = 'prompt'
             placeholder = 'A plush toy robot sitting against a yellow wall'
@@ -69,8 +74,32 @@ const CreatePost = () => {
               />
             )}
 
-            {generatingImg &&}
+            {generatingImg &&(
+              <div className='absolute z-0 flex items-center justify-center insert-0 bg-[rgba(0,0,0,0.5)] rounded-lg'>
+                <Loader/>
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className='flex gap-5 mt-5'>
+          <button 
+            type = "button"
+            onClick={generateImage}
+            className='px-5 text-sm font-medium text-white bg-green-700 rounded-md sm:w-auto py-2.5 text-center w-full'
+          >
+            {generatingImg ? 'Generating...' : 'Generate'}
+          </button>
+        </div>
+
+        <div className='mt-10'>
+          <p className='mt-2 text-[#6663e75] text-[14px]'>Once u have created an image ,you can share with the community</p>
+              <button
+                type='submit'
+                className='mt-3 text-white bg-[#6469ff] font-mono rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+              >
+                {loading ? 'sharing...' : 'share with the community'} 
+              </button>
         </div>
       </form>
     </section>
