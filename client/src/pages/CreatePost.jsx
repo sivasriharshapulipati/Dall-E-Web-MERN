@@ -46,13 +46,31 @@ const CreatePost = () => {
           <FormField
             LabelName = 'Prompt'
             type ='text'
-            name = 'Prompt'
+            name = 'prompt'
             placeholder = 'A plush toy robot sitting against a yellow wall'
             value= {form.prompt}
             handleChange = {handleChange}
             isSurpriseMe
             handleSurpriseMe = {handleSurpriseMe}
           />
+          
+          <div className='relative items-center justify-center w-64 h-64 p-3 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50-lg focus:ring-blue-500 focus:border-blue-500'>
+            {form.photo ?(
+              <img
+                src={form.photo}
+                alt={form.photo}
+                className='object-contain w-full h-full'
+              />
+            ):(
+              <img
+                src={preview}
+                alt='preview'
+                className='object-contain w-9/12 h-9/12 opacity-40'
+              />
+            )}
+
+            {generatingImg &&}
+          </div>
         </div>
       </form>
     </section>
